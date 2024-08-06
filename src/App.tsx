@@ -30,7 +30,7 @@ function App() {
   return (
     <Stack
       justifyContent="center"
-      className={`h-screen p-${matches ? "16" : "8"}`}
+      className={`h-screen ${matches ? "p-16" : "p-4"}`}
       sx={{ bgcolor: color }}
     >
       <Routes>
