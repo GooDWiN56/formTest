@@ -1,25 +1,71 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import { Stack } from "@mui/material";
+import { blueGrey } from "@mui/material/colors";
+import { Navigate, Route, Routes } from "react-router-dom";
+import HomePage from "pages/HomePage";
+import PersonalDataPage from "pages/PersonalDataPage";
+import AddressesDataPage from "pages/AddressesDataPage";
+import { IPersonData } from "interfaces";
+import LoanCalculator from "pages/LoanCalculator";
+
+const clearPerson: IPersonData = {
+  address: "",
+  home: "",
+  lastName: "",
+  loanAmount: 200,
+  loanTerm: 1,
+  name: "",
+  gender: "Мужской",
+  phone: "",
+  work: "",
+};
 
 function App() {
+  const color = blueGrey[200];
+
+  const [personalData, setPersonalData] = useState<IPersonData>(clearPerson);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Stack
+      justifyContent="center"
+      className="h-screen p-16"
+      sx={{ bgcolor: color }}
+    >
+      <Routes>
+        <Route path="*" element={<Navigate to="/person" replace={true} />} />
+        <Route index path="/" element={<HomePage />} />
+        <Route
+          index
+          path="/person"
+          element={
+            <PersonalDataPage
+              personalData={personalData}
+              setPersonalData={setPersonalData}
+            />
+          }
+        />
+        <Route
+          index
+          path="/addresses"
+          element={
+            <AddressesDataPage
+              personalData={personalData}
+              setPersonalData={setPersonalData}
+            />
+          }
+        />
+        <Route
+          index
+          path="/calculator"
+          element={
+            <LoanCalculator
+              personalData={personalData}
+              setPersonalData={setPersonalData}
+            />
+          }
+        />
+      </Routes>
+    </Stack>
   );
 }
 
