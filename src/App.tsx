@@ -23,7 +23,7 @@ const clearPerson: IPersonData = {
 function App() {
   const color = blueGrey[200];
   const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.up("sm"));
+  const matches = useMediaQuery(theme.breakpoints.up("md"));
 
   const [personalData, setPersonalData] = useState<IPersonData>(clearPerson);
 
