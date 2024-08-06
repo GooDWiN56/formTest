@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Stack } from "@mui/material";
+import { Stack, useMediaQuery, useTheme } from "@mui/material";
 import { blueGrey } from "@mui/material/colors";
 import { Navigate, Route, Routes } from "react-router-dom";
 import HomePage from "pages/HomePage";
@@ -22,13 +22,17 @@ const clearPerson: IPersonData = {
 
 function App() {
   const color = blueGrey[200];
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.up("sm"));
+
+  if (matches) alert("sm");
 
   const [personalData, setPersonalData] = useState<IPersonData>(clearPerson);
 
   return (
     <Stack
       justifyContent="center"
-      className="h-screen p-16"
+      className={`h-screen p-${matches ? "16" : "8"}`}
       sx={{ bgcolor: color }}
     >
       <Routes>

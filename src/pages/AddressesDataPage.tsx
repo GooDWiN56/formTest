@@ -25,7 +25,7 @@ const AddressesDataPage: FC<IDataPages> = ({
   };
   const [workOption, setWorkOption] = useState<string[]>([]);
   useEffect(() => {
-    const result = fetch("https://dummyjson.com/products/category-list")
+    fetch("https://dummyjson.com/products/category-list")
       .then(async (res) => setWorkOption(await res.json()))
       .catch(console.error);
     // setWorkOption(result);
