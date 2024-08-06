@@ -25,8 +25,6 @@ function App() {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up("sm"));
 
-  if (matches) alert("sm");
-
   const [personalData, setPersonalData] = useState<IPersonData>(clearPerson);
 
   return (
