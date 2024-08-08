@@ -12,8 +12,6 @@ const clearPerson: IPersonData = {
   address: "",
   home: "",
   lastName: "",
-  loanAmount: 200,
-  loanTerm: 1,
   name: "",
   gender: "Мужской",
   phone: "",
@@ -21,10 +19,12 @@ const clearPerson: IPersonData = {
 };
 
 function App() {
+  // оформление
   const color = blueGrey[200];
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up("md"));
 
+  // сотсояние данных форм
   const [personalData, setPersonalData] = useState<IPersonData>(clearPerson);
 
   return (
@@ -34,8 +34,12 @@ function App() {
       sx={{ bgcolor: color }}
     >
       <Routes>
+        {/* переход к первой форме с неизвестных страниц */}
         <Route path="*" element={<Navigate to="/person" replace={true} />} />
+
+        {/* главная  */}
         <Route index path="/" element={<HomePage />} />
+        {/* персональные данные */}
         <Route
           index
           path="/person"
@@ -46,6 +50,7 @@ function App() {
             />
           }
         />
+        {/* адрес и работа */}
         <Route
           index
           path="/addresses"
@@ -56,6 +61,7 @@ function App() {
             />
           }
         />
+        {/* калькулятор займа */}
         <Route
           index
           path="/calculator"

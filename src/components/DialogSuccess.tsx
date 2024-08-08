@@ -10,6 +10,7 @@ import { IDialogSuccess } from "interfaces";
 import { IconX } from "@tabler/icons-react";
 import { useNavigate } from "react-router-dom";
 
+// Диалоговое акно успешного займа
 const DialogSuccess: FC<IDialogSuccess> = ({ open, setOpen, text }) => {
   const navigate = useNavigate();
   const handleClose = () => {

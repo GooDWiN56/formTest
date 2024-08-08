@@ -1,35 +1,45 @@
-import { Box, Slider, Typography } from "@mui/material";
+import { Box, Slider, TextField, Typography } from "@mui/material";
 import WrapperForm from "components/WrapperForm";
 import { IDataPages } from "interfaces";
 import React, { FC, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 
+// форма займа
 const LoanCalculator: FC<IDataPages> = ({ personalData, setPersonalData }) => {
+  // Состояние диалогового окна
   const [dialogOpen, setDialogOpen] = useState<boolean>(false);
   const [dialogText, setDialogText] = useState<string>("");
 
+  // переход между формама
   const navigate = useNavigate();
   const prevStep = () => {
     navigate("/addresses");
   };
+  //сумма займа вывод значения
   function valueAmount(value: number) {
     return `$${value}`;
   }
+  // изменение суммы займа
   const amountChange = (event: Event, newValue: number | number[]) => {
     setPersonalData((prev: any) => ({
       ...prev,
       loanAmount: newValue as number,
     }));
   };
+
+  //срок займа вывод значения
   function valueTerm(value: number) {
     return `${value}`;
   }
+  // изменение срока займа
   const termChange = (event: Event, newValue: number | number[]) => {
     setPersonalData((prev: any) => ({
       ...prev,
       loanTerm: newValue as number,
     }));
   };
+
+  // отправка формы
   const sendData = () => {
     fetch("https://dummyjson.com/products/add", {
       method: "POST",
@@ -49,6 +59,7 @@ const LoanCalculator: FC<IDataPages> = ({ personalData, setPersonalData }) => {
       })
       .catch(console.error);
   };
+  // проверка заполнения пред. формы
   if (!personalData.work || !personalData.address)
     return <Navigate to="/addresses" />;
   return (
@@ -61,7 +72,7 @@ const LoanCalculator: FC<IDataPages> = ({ personalData, setPersonalData }) => {
       dialogSetOpen={setDialogOpen}
       dialogText={dialogText}
     >
-      <button onClick={() => console.log(personalData)}>but</button>
+      {/* сумма займа */}
       <Box sx={{ width: "100%", maxWidth: "450px" }}>
         <Typography variant="subtitle1" align="center">
           Суммы займа:{" "}
@@ -69,7 +80,7 @@ const LoanCalculator: FC<IDataPages> = ({ personalData, setPersonalData }) => {
             ${personalData.loanAmount}
           </Typography>
         </Typography>
-        <Box>
+        <Box sx={{ position: "relative" }}>
           <Slider
             aria-label="Сумма займа"
             value={personalData.loanAmount}
@@ -81,8 +92,23 @@ const LoanCalculator: FC<IDataPages> = ({ personalData, setPersonalData }) => {
             max={1000}
             onChange={amountChange}
           />
+          <TextField
+            value={personalData.loanAmount}
+            size="small"
+            required
+            sx={{
+              position: "absolute",
+              left: 0,
+              top: 0,
+              zIndex: -1,
+              width: "100%",
+              height: "100%",
+              opacity: 0,
+            }}
+          />
         </Box>
       </Box>
+      {/* срок займа */}
       <Box sx={{ width: "100%", maxWidth: "450px" }}>
         <Typography variant="subtitle1" align="center">
           Срок займа:{" "}
@@ -93,7 +119,7 @@ const LoanCalculator: FC<IDataPages> = ({ personalData, setPersonalData }) => {
             </Typography>
           </Typography>
         </Typography>
-        <Box>
+        <Box sx={{ position: "relative" }}>
           <Slider
             aria-label="Срок займа"
             value={personalData.loanTerm}
@@ -104,6 +130,20 @@ const LoanCalculator: FC<IDataPages> = ({ personalData, setPersonalData }) => {
             min={1}
             max={30}
             onChange={termChange}
+          />
+          <TextField
+            value={personalData.loanTerm}
+            size="small"
+            required
+            sx={{
+              position: "absolute",
+              left: 0,
+              top: 0,
+              zIndex: -1,
+              width: "100%",
+              height: "100%",
+              opacity: 0,
+            }}
           />
         </Box>
       </Box>

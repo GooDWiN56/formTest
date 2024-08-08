@@ -16,19 +16,9 @@ import {
 } from "@tabler/icons-react";
 import React, { FC } from "react";
 import DialogSuccess from "./DialogSuccess";
+import { IWrapperForm } from "interfaces";
 
-interface IWrapperForm {
-  children: React.ReactNode;
-  finishStep?: () => void;
-  nextStep?: () => void;
-  prevStep?: () => void;
-  stepIndex: 0 | 1 | 2;
-  title?: string;
-  dialogOpen?: boolean;
-  dialogSetOpen?: (prop?: any) => void;
-  dialogText?: string;
-}
-
+// оформление формы
 const WrapperForm: FC<IWrapperForm> = ({
   children,
   finishStep,
@@ -40,13 +30,16 @@ const WrapperForm: FC<IWrapperForm> = ({
   dialogSetOpen = () => console.log,
   dialogText = "",
 }) => {
+  // шапка формы
   const steps = ["Личные данные", "Адреса", "Калькулятор займа"];
 
+  // onSubmit формы
   const handlerSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     nextStep && nextStep();
     finishStep && finishStep();
   };
+  // стилизация иконок
   const styleIcon = {
     size: 20,
     stroke: 2,
@@ -59,6 +52,7 @@ const WrapperForm: FC<IWrapperForm> = ({
             onSubmit={handlerSubmit}
             className="h-[100%] flex flex-col items-center space-y-4 pt-4"
           >
+            {/* Шапка формы с нумерацие этапа формы */}
             <Stepper
               activeStep={stepIndex}
               alternativeLabel
@@ -77,11 +71,14 @@ const WrapperForm: FC<IWrapperForm> = ({
               className="flex-grow w-[100%] items-center justify-center"
               spacing={2}
             >
+              {/* заголовок */}
               <Typography variant="h4" align="center">
                 {title}
               </Typography>
+              {/* Форма */}
               {children}
             </Stack>
+            {/* кнопки назад/вперед/отправить */}
             <Stack
               direction="row"
               justifyContent="space-around"
@@ -112,6 +109,7 @@ const WrapperForm: FC<IWrapperForm> = ({
           </form>
         </CardContent>
       </Card>
+      {/* Диалоговое онко */}
       <DialogSuccess
         open={dialogOpen}
         setOpen={dialogSetOpen}

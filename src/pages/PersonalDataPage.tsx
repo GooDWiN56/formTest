@@ -12,6 +12,7 @@ import {
 import { IDataPages } from "interfaces";
 import InputMask from "react-input-mask";
 
+// форма персональных данныых
 const PersonalDataPage: FC<IDataPages> = ({
   personalData,
   setPersonalData,
@@ -44,6 +45,7 @@ const PersonalDataPage: FC<IDataPages> = ({
           label="Телефон"
           variant="outlined"
           size="small"
+          required
         />
       </InputMask>
 

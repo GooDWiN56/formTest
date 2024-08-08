@@ -12,10 +12,12 @@ import { IDataPages } from "interfaces";
 import React, { FC, useEffect, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 
+// форма адреса и работы
 const AddressesDataPage: FC<IDataPages> = ({
   personalData,
   setPersonalData,
 }) => {
+  // навигация по формам
   const navigate = useNavigate();
   const prevStep = () => {
     navigate("/person");
@@ -23,6 +25,7 @@ const AddressesDataPage: FC<IDataPages> = ({
   const nextStep = () => {
     navigate("/calculator");
   };
+  // получение options места работы
   const [workOption, setWorkOption] = useState<string[]>([]);
   useEffect(() => {
     fetch("https://dummyjson.com/products/category-list")
@@ -31,6 +34,7 @@ const AddressesDataPage: FC<IDataPages> = ({
     // setWorkOption(result);
   }, []);
 
+  // проверка пред. формы
   if (
     !personalData.name ||
     !personalData.lastName ||
@@ -61,6 +65,7 @@ const AddressesDataPage: FC<IDataPages> = ({
                 work: event.target.value,
               }));
             }}
+            required
           >
             {workOption.map((i: string, k: number) => (
               <MenuItem value={i} key={k}>
