@@ -52,12 +52,12 @@ const AddressesDataPage: FC<IDataPages> = ({
     >
       {workOption.length > 0 ? (
         <FormControl fullWidth size="small" sx={{ maxWidth: "320px" }}>
-          <InputLabel id="work-label">Место работы</InputLabel>
+          <InputLabel id="work-label">Место работы *</InputLabel>
           <Select
             labelId="work-label"
             id="work"
             value={personalData.work}
-            label="Место работы"
+            label="Место работы *"
             onChange={(event: SelectChangeEvent) => {
               setPersonalData((prev: any) => ({
                 ...prev,

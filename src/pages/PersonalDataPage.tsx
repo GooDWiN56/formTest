@@ -83,12 +83,12 @@ const PersonalDataPage: FC<IDataPages> = ({
         value={personalData.lastName}
       />
       <FormControl fullWidth sx={{ maxWidth: "320px" }}>
-        <InputLabel id="gender-label">Пол</InputLabel>
+        <InputLabel id="gender-label">Пол *</InputLabel>
         <Select
           labelId="gender-label"
           id="gender"
           value={personalData.gender}
-          label="Пол"
+          label="Пол *"
           onChange={(event: SelectChangeEvent) => {
             setPersonalData((prev: any) => ({
               ...prev,
