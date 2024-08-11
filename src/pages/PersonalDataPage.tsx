@@ -38,6 +38,7 @@ const PersonalDataPage: FC<IDataPages> = ({
         alwaysShowMask
       >
         <TextField
+          autoFocus
           fullWidth
           sx={{ maxWidth: "320px" }}
           type="tel"
@@ -50,7 +51,6 @@ const PersonalDataPage: FC<IDataPages> = ({
       </InputMask>
 
       <TextField
-        autoFocus
         fullWidth
         sx={{ maxWidth: "320px" }}
         id="input-name"
@@ -67,7 +67,6 @@ const PersonalDataPage: FC<IDataPages> = ({
         value={personalData.name}
       />
       <TextField
-        autoFocus
         fullWidth
         sx={{ maxWidth: "320px" }}
         id="input-lastName"

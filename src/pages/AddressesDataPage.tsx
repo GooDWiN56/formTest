@@ -50,7 +50,6 @@ const AddressesDataPage: FC<IDataPages> = ({
       nextStep={nextStep}
       prevStep={prevStep}
     >
-      <button onClick={() => console.log(personalData)}>but</button>
       {workOption.length > 0 ? (
         <FormControl fullWidth size="small" sx={{ maxWidth: "320px" }}>
           <InputLabel id="work-label">Место работы</InputLabel>
@@ -66,6 +65,7 @@ const AddressesDataPage: FC<IDataPages> = ({
               }));
             }}
             required
+            autoFocus
           >
             {workOption.map((i: string, k: number) => (
               <MenuItem value={i} key={k}>
@@ -83,7 +83,6 @@ const AddressesDataPage: FC<IDataPages> = ({
       )}
 
       <TextField
-        autoFocus
         fullWidth
         sx={{ maxWidth: "320px" }}
         id="input-address"
